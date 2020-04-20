@@ -1,9 +1,10 @@
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const start = document.querySelector('.start'); 
-const missed = 0;                                                                   //if the player guesses wrong 5 times, they lose the game)
+let missed = 0;                                                                   //if the player guesses wrong 5 times, they lose the game)
 const overlay = document.getElementById('overlay');
-const heart = document.querySelector('#scoreboard ol');
+const heart = document.getElementsByTagName('IMG');
+
 
 start.addEventListener('click', () => {
     overlay.style.display = 'none';
@@ -47,41 +48,40 @@ addPhraseToDisplay(phraseArray);
 
 const checkLetter = button => {
     const guesses = document.getElementsByClassName('letter');
-    let match = 0;
-    for (i = 0; i = guesses.length; i ++) {
-        console.log(guesses[i]);
-        if (guesses[i].textContent.toLowerCase() === button.toLowerCase()) {
+    let match = null;
+    for (i = 0; i < guesses.length; i ++) {
+        if (guesses[i].textContent === button) {
             guesses[i].classList.add('show');
-            match = button.textContent;
+            match = guesses[i].innerHTML;
             }
         }
-        return match;
+        return(match);
     }
 
 qwerty.addEventListener('click', (e) => {
-    if (e.target.tagName === 'BUTTON' && e.target.className !== 'chosen') {
+    document.getElementsByClassName('letter')
+    if (e.target.tagName === 'BUTTON') {
         e.target.classList.add('chosen');
-        const foundLetter = checkLetter(e.target.textContent);
-      } 
-    else if (foundLetter === null) {
-        heart.removeChild('tries');
+    }
+    const yesLetter = checkLetter(e.target.innerHTML);
+    checkWin();
+    if (yesLetter == null) {
         missed += 1;
+        heart[missed - 1].src = "/Users/charlottekeddie/Downloads/game_show_app_v1.2/images/lostHeart.png";
     }
 });
 
 
-
-
-// const checkWin = () => {
-//     const haveLetter = document.getElementsByClassName('letter');
-//     const haveShow = document.getElementsByClassName('show');
-//     if (haveLetter.length === haveShow.length) {
-//         overlay.classList.add('win');
-//         overlay.style.display = 'flex';
-//         overlay.innerHTML = 'You won. Way to go!!';
-//     } else if (missed > 4) {
-//         overlay.classList.add('lose');
-//         overlay.style.display = 'flex';
-//         overlay.innerHTML = 'You lost. Better luck next time';
-//     }
-// }
+const checkWin = () => {
+    const haveLetter = document.getElementsByClassName('letter');
+    const haveShow = document.getElementsByClassName('show');
+    if (haveLetter.length === haveShow.length) {
+        overlay.classList.add('win');
+        overlay.style.display = 'flex';
+        overlay.innerHTML = 'You won. Way to go!!';
+    } else if (missed > 4) {
+        overlay.classList.add('lose');
+        overlay.style.display = 'flex';
+        overlay.innerHTML = 'You lost. Better luck next time';
+    }
+}
