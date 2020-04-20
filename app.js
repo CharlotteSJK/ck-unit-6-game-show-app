@@ -4,6 +4,7 @@ const start = document.querySelector('.start');
 let missed = 0;                                                                   //if the player guesses wrong 5 times, they lose the game)
 const overlay = document.getElementById('overlay');
 const heart = document.getElementsByTagName('IMG');
+const margin = document.querySelectorAll('.letter'); 
 
 
 start.addEventListener('click', () => {
@@ -15,15 +16,13 @@ const phrases = [
     'it is never too late',
     'imagination will take you everywhere',
     'keep your face to the sunshine',
-    'experience is simply the name we give our mistakes'
+    'experience is the name we give our mistakes'
 ];
-
 
 const getRandomPhraseAsArray = arr => {                                             //do stuff to any arr that is passed in
     const randomPhrase = arr[Math.floor(Math.random() * arr.length)];       
     const randomPhraseSplit = randomPhrase.split('');
     return randomPhraseSplit;
-
 }
 
 getRandomPhraseAsArray(phrases);
@@ -39,7 +38,8 @@ for (let i = 0; i < arr.length; i ++) {
     if (arr[i] === " ") {
         li.classList.add('space');
         } else {
-        li.classList.add('letter');    
+        li.classList.add('letter');  
+        //margin.style.marginRight = '5px'; 
         }                        
     }
 }
@@ -52,6 +52,7 @@ const checkLetter = button => {
     for (i = 0; i < guesses.length; i ++) {
         if (guesses[i].textContent === button) {
             guesses[i].classList.add('show');
+            guesses[i].style.transitionDuration = '1.5s';
             match = guesses[i].innerHTML;
             }
         }
@@ -62,12 +63,13 @@ qwerty.addEventListener('click', (e) => {
     document.getElementsByClassName('letter')
     if (e.target.tagName === 'BUTTON') {
         e.target.classList.add('chosen');
+        e.target.disabled = true;
     }
     const yesLetter = checkLetter(e.target.innerHTML);
     checkWin();
-    if (yesLetter == null) {
+    if (yesLetter == null && e.target.tagName === 'BUTTON') {
         missed += 1;
-        heart[missed - 1].src = "/Users/charlottekeddie/Downloads/game_show_app_v1.2/images/lostHeart.png";
+        heart[missed - 1].src = "images/lostHeart.png";
     }
 });
 
