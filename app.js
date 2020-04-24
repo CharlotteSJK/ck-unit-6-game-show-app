@@ -47,7 +47,7 @@ for (let i = 0; i < arr.length; i ++) {
 
 addPhraseToDisplay(phraseArray); 
 
-//checks if the letter pressed is in the phrase
+//checks if the letter pressed is in the displayed phrase
 
 const checkLetter = button => {
     const guesses = document.getElementsByClassName('letter');
@@ -81,12 +81,13 @@ const checkWin = () => {
 }
 
 const resetGame = () => {
-    // ul.innerHTML = '';                                       //innnerHTML always gives the same phrase on reset
-    //const list = phrase.querySelectorAll('li');
-    //for (let i = 0; i < list.length; i++) {                   //for loop adds the new phrase multiple times
-        //ul.removeChild(list[i]); 
+    //ul.innerHTML = '';                                       
+    const list = phrase.querySelectorAll('li');
+    for (let i = 0; i < list.length; i++) {                  
+        ul.removeChild(list[i]); 
+    }
     //while (ul.firstChild) {
-    //ul.removeChild(ul.firstChild);                           //while loop always gives the same phrase on reset
+    //ul.removeChild(ul.firstChild);                           
     //} 
     for (let i = 0; i < button.length; i++) {
         button[i].classList.remove('chosen')
@@ -96,16 +97,16 @@ const resetGame = () => {
     heart[i].src = "images/liveHeart.png";
     }
     missed = 0;
-    getRandomPhraseAsArray(phrases);  
-    addPhraseToDisplay(phraseArray); 
+    const newPhrase = getRandomPhraseAsArray(phrases); 
+    addPhraseToDisplay(newPhrase); 
 }
 
 
 //EVENT LISTENERS
 
-//to starts or reset game
+//to start or reset game
 
-start.addEventListener('click', () => {
+reset.addEventListener('click', () => {
     overlay.style.display = 'none';
     if (haveLetter.length === haveShow.length || missed > 4) {
         resetGame();
@@ -120,12 +121,11 @@ qwerty.addEventListener('click', (e) => {
         e.target.disabled = true;
     }
     const yesLetter = checkLetter(e.target.innerHTML);
-    checkWin();
     if (yesLetter == null && e.target.tagName === 'BUTTON') {
     missed += 1;
-    heart[missed - 1].src = "images/lostHeart.png";                     //sometimes I get the error Uncaught TypeError: Cannot set property 'src' of undefined
-                                                                        //at HTMLDivElement.<anonymous> (app.js:125) - my game seems to give 6 tries to the player instead of 5...
-    }
+    heart[missed - 1].src = "images/lostHeart.png";                    
+}
+checkWin(); 
 });
 
 
