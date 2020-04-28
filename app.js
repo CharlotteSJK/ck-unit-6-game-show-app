@@ -56,6 +56,7 @@ const checkLetter = button => {
         if (guesses[i].textContent === button) {
             guesses[i].classList.add('show');
             guesses[i].style.transitionDuration = '1.5s';
+            //guesses[i].style.transform = 'rotate(360deg)';
             match = guesses[i].innerHTML;
             }
         }
@@ -68,13 +69,11 @@ const checkWin = () => {
     if (haveLetter.length === haveShow.length) {
         overlay.classList.add('win');
         overlay.style.display = 'flex';
-        start.style.color = '#78CF82';
         title.innerHTML = 'You won. Way to go!!';
         reset.innerHTML = 'Restart Game';
     } else if (missed > 4) {
         overlay.classList.add('lose');
         overlay.style.display = 'flex';
-        start.style.color = '#D94545';
         title.innerHTML = 'You lost. Better luck next time';
         reset.innerHTML = 'Try Again';
     }
