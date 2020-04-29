@@ -56,7 +56,7 @@ const checkLetter = button => {
         if (guesses[i].textContent === button) {
             guesses[i].classList.add('show');
             guesses[i].style.transitionDuration = '1.5s';
-            //guesses[i].style.transform = 'rotate(360deg)';
+            guesses[i].style.transform = 'rotate(360deg)';
             match = guesses[i].innerHTML;
             }
         }
@@ -98,6 +98,7 @@ const resetGame = () => {
     missed = 0;
     const newPhrase = getRandomPhraseAsArray(phrases); 
     addPhraseToDisplay(newPhrase); 
+    overlay.classList.remove('win', 'lose')
 }
 
 
