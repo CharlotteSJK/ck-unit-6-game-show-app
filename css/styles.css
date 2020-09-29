@@ -27,6 +27,8 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  /* background: rgb(215,238,174); */
+  background: radial-gradient(circle, rgba(215,238,174,1) 0%, rgba(148,208,233,1) 100%);
 }
 
 li, ol, ul {
@@ -86,6 +88,7 @@ button {
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  border: solid 0.1px var(--color-keys);
 }
 
 .space {
@@ -102,6 +105,10 @@ button {
 .keyrow {
   display: flex;
   justify-content: center;
+}
+
+.keyrow button {
+  border: solid 0.1px var(--color-keys);
 }
 
 .chosen {
@@ -144,7 +151,7 @@ button {
 }
 
 .start a {
-  color: var(--color-win);
+  color: var(--color-start);
 }
 
 .win {

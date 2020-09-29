@@ -1,5 +1,6 @@
 const qwerty = document.getElementById('qwerty');
-const phrase = document.getElementById('phrase');
+const phraseSection = document.getElementById('phrase-section');
+const phraseList = document.getElementById('phrase-list');
 const start = document.querySelector('.start'); 
 let missed = 0;                                                                   
 const overlay = document.getElementById('overlay');
@@ -9,7 +10,7 @@ const reset = document.querySelector('.btn__reset');
 const haveLetter = document.getElementsByClassName('letter');
 const haveShow = document.getElementsByClassName('show');
 const button = document.getElementsByTagName('BUTTON');
-const ul = phrase.querySelector('ul');
+const ul = phraseSection.querySelector('ul');
 
 const phrases = [
     'not all those who wander are lost',
@@ -41,8 +42,15 @@ for (let i = 0; i < arr.length; i ++) {
         li.classList.add('space');
         } else {
         li.classList.add('letter');  
-        }                        
+        }                     
     }
+
+    //trying to add a div around the words in the phrase so they don't break across two lines
+    const classSpace = document.querySelectorAll('.space');
+    const div = document.createElement('div');
+    const classLetter = classSpace.nextSibling;
+    console.log(classLetter);
+    
 }
 
 addPhraseToDisplay(phraseArray); 
@@ -74,7 +82,7 @@ const checkWin = () => {
     } else if (missed > 4) {
         overlay.classList.add('lose');
         overlay.style.display = 'flex';
-        title.innerHTML = 'You lost. Better luck next time';
+        title.innerHTML = 'Awww, you lost. Better luck next time!';
         reset.innerHTML = 'Try Again';
     }
 }
